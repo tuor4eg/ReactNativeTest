@@ -7,14 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  ActivityIndicator,
-  Alert,
-} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 
 import initAPI from './actions/api';
