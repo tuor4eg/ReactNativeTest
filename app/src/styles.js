@@ -52,12 +52,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 30,
   },
+  answer: {
+    width: 350,
+    margin: 5,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    borderRadius: 30,
+  },
   wrappedTaskButton: {
     height: 75,
   },
   flatlist: {
     justifyContent: 'flex-start',
     alignItems: 'center',
+    flex: 1,
+  },
+  digitView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flex: 1,
+  },
+  digit: {
+    height: 50,
+    position: 'relative',
+    backfaceVisibility: 'hidden',
+  },
+  number: {
+    flex: 1,
+    width: 50,
+  },
+  numberBack: {
+    position: 'absolute',
   },
 });
 

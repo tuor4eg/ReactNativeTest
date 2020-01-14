@@ -59,9 +59,15 @@ class QuestionsListScreen extends React.Component {
   };
 
   renderQuestionsList() {
-    const {questions} = this.props;
+    const {questions, user} = this.props;
+    let greetings;
+    if (user) {
+      const {first_name} = user.response[0];
+      greetings = `Привет, ${first_name}!`;
+    }
     return (
       <View style={styles.centered}>
+        <Text style={styles.font}>{greetings}</Text>
         <View style={styles.flatlist}>
           <FlatList
             data={questions}
@@ -88,6 +94,7 @@ class QuestionsListScreen extends React.Component {
 
 const mapStateToProps = state => ({
   questions: state.questions.questions,
+  user: state.user.user,
 });
 
 const mapDispatchToProps = {

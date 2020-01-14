@@ -7,8 +7,11 @@
  */
 
 import React, {Component} from 'react';
-import {Text, FlatList, View, TouchableOpacity} from 'react-native';
+import {Text, FlatList, View} from 'react-native';
+import {HeaderBackButton} from 'react-navigation-stack';
 import {connect} from 'react-redux';
+
+import AnswerView from './AnswerView';
 
 import {getQuestion} from './actions/questions';
 
@@ -18,22 +21,37 @@ class QuestionScreen extends Component {
   /**
    * Screen for chosen question
    */
-  static navigationOptions = () => {
+  static navigationOptions = ({navigation}) => {
     /**
      * Header options: set title
      */
     return {
       headerTitle: 'Вопрос',
+      headerLeft: () => (
+        <HeaderBackButton onPress={navigation.getParam('onPressBack')} />
+      ),
     };
   };
 
   state = {
     loading: true,
+    flip: false,
   };
 
   componentDidMount() {
+    const {navigation} = this.props;
+    navigation.setParams({onPressBack: this.onPressBack});
     this.loadQuestion();
   }
+
+  onPressBack = () => {
+    /**
+     * Function for waiting digits closing and redirecting back
+     */
+    const {navigation} = this.props;
+    this.setState({flip: true});
+    setTimeout(() => navigation.pop(), 500);
+  };
 
   loadQuestion = async () => {
     /**
@@ -52,13 +70,7 @@ class QuestionScreen extends Component {
 
   renderAnswer = ({item}) => {
     const {answer, number} = item;
-
-    return (
-      <TouchableOpacity
-        style={[styles.title, styles.taskButton, styles.wrappedTaskButton]}>
-        <Text style={styles.font}>{`${number}. ${answer}`}</Text>
-      </TouchableOpacity>
-    );
+    return <AnswerView digit={number} text={answer} flip={this.state.flip} />;
   };
 
   renderQuestion() {
