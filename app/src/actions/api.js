@@ -8,16 +8,12 @@ const initAPI = () => dispatch => {
    * Create an instance of QuestionAPI class for using by application
    */
   const api = new QuestionAPI(host);
-  try {
-    return dispatch({
-      type: INIT_API,
-      payload: {
-        api,
-      },
-    });
-  } catch (error) {
-    return error;
-  }
+  return dispatch({
+    type: INIT_API,
+    payload: {
+      api,
+    },
+  });
 };
 
 export default initAPI;
